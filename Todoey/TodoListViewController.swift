@@ -17,6 +17,8 @@ class TodoListViewController: UITableViewController {
         
       
     }
+    
+    //MARK - TableView DataSource Methods
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
        return itemArray.count
@@ -29,6 +31,23 @@ class TodoListViewController: UITableViewController {
          cell.textLabel?.text = itemArray[indexPath.row]
         
         return cell
+    }
+    
+    //MARK - TableView Delegate Methods
+    
+    override func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        //print(itemArray[indexPath.row])
+        
+        tableView.cellForRow(at: indexPath)?.accessoryType = .checkmark
+        
+        if tableView.cellForRow(at: indexPath)?.accessoryType == .checkmark {
+             tableView.cellForRow(at: indexPath)?.accessoryType = .none
+        } else {
+             tableView.cellForRow(at: indexPath)?.accessoryType = .checkmark
+        }
+        
+        tableView.deselectRow(at: indexPath, animated: true)
+    
     }
 
 }
